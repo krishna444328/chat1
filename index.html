@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            width: 50%;
+        }
+
+        h1 {
+            color: #f39c12;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #e67e22;
+        }
+
+        #chatbox {
+            text-align: left;
+            background: #222;
+            padding: 10px;
+            border-radius: 10px;
+            height: 300px;
+            overflow-y: scroll;
+            margin-top: 20px;
+        }
+
+        .user-message {
+            color: #00ffcc;
+        }
+
+        .bot-message {
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Chatbot</h1>
+        <div id="chatbox"></div>
+        <input type="text" id="userInput" placeholder="Type your message here...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        const responses = {
+            "hello": "Hi there! How can I assist you today?",
+            "how are you": "I'm just a bot, but I'm doing great! Thanks for asking.",
+            "your name": "I'm an AI chatbot created to help you!",
+            "bye": "Goodbye! Have a great day!",
+            "who created you": "I was created by a developer who loves coding!",
+            "time": "The current time is " + new Date().toLocaleTimeString() + ".",
+            "date": "Today's date is " + new Date().toISOString().split('T')[0] + ".",
+            "day": "Today is " + new Date().toLocaleDateString(undefined, { weekday: 'long' }) + ".",
+            "best gaming channel": "check this channel=><a href='https://www.youtube.com/@rajput_444-l9d' target='_blank'>Rajput 444</a>.",
+            
+            // Free Fire related responses
+            "free fire best gun": "The best gun in Free Fire depends on your playstyle, but popular choices are MP40, M1887, and Groza.",
+            "free fire best character": "Some of the best Free Fire characters are Alok, K, Chrono, and Wukong.",
+            "free fire diamonds": "You can get Free Fire diamonds through top-up services, events, and giveaways.",
+            "free fire tips": "Always keep moving, use cover wisely, and pick your fights strategically to survive longer!",
+            "free fire best settings": "Use high sensitivity for quick aim movement and adjust controls based on your comfort.",
+            "free fire rank push tips": "For rank push, play with a good squad, avoid unnecessary fights, and survive till the end zone.",
+            "free fire best pet": "Falco for early drop advantage, Ottero for EP recovery, and Poring for armor durability are great choices!",
+            "free fire upcoming events": "Check the Free Fire official website or in-game news section for upcoming events!",
+            "free fire top player": "Some of the top Free Fire players are TSG Jash, Sudip Sarkar, and SK Sabir Boss!",
+            "free fire tricks": "Use gloo walls effectively, pre-fire at corners, and practice headshots to improve gameplay!",
+            "free fire ka pro player": "krishna444!",
+            "free fire ka pro player kon hai": "krishna444!"
+        };
+
+        function sendMessage() {
+            let userInput = document.getElementById("userInput").value;
+            if (userInput.trim() === "") return;
+            
+            let chatbox = document.getElementById("chatbox");
+            chatbox.innerHTML += "<p class='user-message'><strong>You:</strong> " + userInput + "</p>";
+            document.getElementById("userInput").value = "";
+
+            let botResponse = "Sorry, I didn't understand that.";
+            for (let key in responses) {
+                if (userInput.toLowerCase().includes(key)) {
+                    botResponse = responses[key];
+                    break;
+                }
+            }
+            
+            chatbox.innerHTML += "<p class='bot-message'><strong>Bot:</strong> " + botResponse + "</p>";
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        document.getElementById("userInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
